@@ -1,32 +1,6 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Mae Pay Soh - Web Application</title>
-	<link rel="stylesheet" type="text/css" href="bower_components/semantic/dist/semantic.min.css">
-	<script src="bower_components/jquery/dist/jquery.min.js"></script>
-	<style type="text/css">
-		.main {
-			margin-top: 80px;
-		}
-	</style>
-</head>
-<body>
-	<header>
-		<div class="ui fixed menu">
-			<div class="ui container">
-				<div class="header item">
-					<!-- <img class="logo" src="assets/images/logo.png"> -->
-					Mae Pay Soh
-				</div>
-				
-				<div class="right menu">					
-					<a href="#" class="item">
-						<i class="sidebar icon"></i> Menu					
-					</a>
-				</div>
-			</div>
-		</div>			
-	</header> <!-- HEADER END -->
+@extends('master')
+
+@section('content')
 
 	<div class="ui main text container">
 		
@@ -49,12 +23,8 @@
 
 			</form>
 
-		</section> <!-- Candidate Detail END -->
+		</section>
 
-		
+	</div>
 
-	<footer>
-		
-	</footer> <!-- FOOTER END -->
-</body>
-</html>
+@stop

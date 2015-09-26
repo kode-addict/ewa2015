@@ -60,12 +60,13 @@
     </script>
 
         <div class="ui vertical inverted right wide sidebar labeled icon menu">
-            <a href="#" class="item">Home</a>
-            <a href="#" class="item">Party</a>
-            <a href="#" class="item">Candidate</a>
-            <a href="#" class="item">Voter Education</a>
-            <a href="#" class="item">About</a>
-            <a href="#" class="item">Test Link</a>
+            <a href="{{ url('/') }}" class="item">Home</a>
+            <a href="{{ url('party') }}" class="item">Party</a>
+            <a href="{{ url('candidate') }}" class="item">Candidate</a>
+            <a href="{{ url('faq') }}" class="item">Voter Education</a>
+            <a href="{{ url('about') }}" class="item">About</a>
+            <a href="{{ url('register') }}" class="item">Register</a>
+            <a href="{{ url('login') }}" class="item">Login</a>            
         </div> <!-- SideBar END -->
 
         <div class="dimmed pusher">
@@ -74,12 +75,12 @@
                     <div class="ui container">
                         <div class="header item">
                             <!-- <img class="logo" src="assets/images/logo.png"> -->
-                            Mae Pay Soh
+                            <a href="{{ url('/') }}">Mae Pay Soh</a>
                         </div>
 
                         <div class="right menu">
                             <a href="#" class="item" onclick="$('.ui.sidebar').sidebar('toggle');">
-                                <i class="sidebar icon"></i> Menu
+                                <i class="sidebar icon"></i>
                             </a>
                         </div>
                     </div>
