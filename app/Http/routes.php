@@ -42,8 +42,10 @@ Route::resource('party.candidate', 'PartyCandidateController');
 
 $router->get('candidate/search/{name}', 'CandidateController@candidateSearch');
 
-$router->get('candidatelist/search', 'CandidateController@candidateListSearch');
+$router->get('candidate/compare/{p1}/{p2}', 'CandidateController@compare');
 
+$router->get('candidatelist/search', 'CandidateController@candidateListSearch');
+ Auth::loginUsingId(1);
 
 // Hein Zin's Repo
 

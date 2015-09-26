@@ -11,7 +11,7 @@
         <meta property="11111og:type" content="article" />
         <meta property="og:title" content="When Great Minds Don’t Think Alike" />
         <meta property="og:description"content="How much does culture influence creative thinking?" />
-
+        
         <meta property="og:image" content="{{ $candidate->data->photo_url }}" />
 
         @endIf
@@ -49,6 +49,15 @@
     </head>
     <body>
 
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.4";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+</script>
     <div id="fb-root"></div>
     <script>(function(d, s, id) {
       var js, fjs = d.getElementsByTagName(s)[0];

@@ -41270,6 +41270,7 @@ $('#statestep3').hide();
 
 	});
 
+		var statename=$('#upperstep1 select').val();
 
 
 
@@ -41279,6 +41280,187 @@ $('#statestep3').hide();
 
 		  .transition('fade',function() {
 		    	
+		    	$('#statestep2').transition('fade');
+
+		  });
+
+		$('#statestep1header').addClass('grey');
+
+		$('#statestep1header i').removeClass('hidden');
+
+		$('#statestep2header').removeClass('grey');
+
+		var statename=$('#statestep1 select').val();
+
+		var select=$('#statestep2 select');
+
+		$.ajax({
+	    	
+	    	type:"GET",
+
+	    	url:'geo?st_name='+statename+'&no_geo=true',
+
+	    	dataType:'json',
+	    	
+	    	beforeSend:function(data){ 
+	    		$('#statestep2 .dimmer').addClass('active');
+	    	},
+	    	success:function(datas){
+				
+				select.children("option:not(:first-child)").remove();
+				
+				$.each(datas.data,function(key,value){		
+					
+					return buildOption(value.properties.DT,value.properties.DT_PCODE,select);	
+
+				});	 
+				   		
+	        	$('#statestep2 .dimmer').removeClass('active');
+	    	}
+		});		
+
+	});
+
+
+
+
+	$('#statestep2 .done').click(function() {
+
+		$('#statestep2')
+
+		  .transition('fade',function() {
+		    	
+		    	$('#statestep3').transition('fade');
+
+		  });
+
+		$('#statestep2header i').removeClass('hidden');
+
+		$('#statestep2header').addClass('grey');
+
+		$('#statestep3header').removeClass('grey');
+
+		var districtcode=$('#statestep2 select').val();		
+
+		var select=$('#statestep3 select');
+
+
+
+		$.ajax({
+	    	
+	    	type:"GET",
+
+	    	url:'geo/lowerhouse?dt_pcode='+districtcode+'&no_geo=true',
+
+	    	dataType:'json',
+	    	
+	    	beforeSend:function(data){ 
+	    		$('#statestep3 .dimmer').addClass('active');
+	    	},
+	    	success:function(datas){
+				
+				select.children("option:not(:first-child)").remove();
+				
+				$.each(datas.data,function(key,value){		
+					
+					return buildOption(value.properties.TS,value.properties.TS_PCODE,select);	
+
+				});	 
+				   		
+	        	$('#statestep3 .dimmer').removeClass('active');
+	    	}
+		});
+
+	});
+
+
+	$('#statestep2 .back').click(function() {
+
+		$('#statestep2')
+
+		  .transition('fade',function() {
+		    		
+		    		$('#statestep1').transition('fade');
+		    	
+		  });
+
+		$('#statestep1header i').addClass('hidden');  
+
+		$('#statestep2header').addClass('grey');
+
+		$('#statestep1header').removeClass('grey');
+
+
+	});
+
+
+	$('#statestep3 .back').click(function(e) {
+
+		e.preventDefault();
+
+		$('#statestep3')
+
+		  .transition('fade',function() {
+		    		
+		    		$('#statestep2').transition('fade');
+		    	
+		  });
+
+		$('#statestep2header i').addClass('hidden');
+
+		$('#statestep3header').addClass('grey');
+
+		$('#statestep2header').removeClass('grey');
+
+
+	});
+
+	$('#statestep3 .done').click(function(e) {
+
+		e.preventDefault();
+
+		$('#statestep3header i').removeClass('hidden');
+
+		$('#statestep3 form').submit();
+
+
+	});
+
+	function buildOption(name,code,select){
+			
+
+			var option=$('<option>').val(code).text(name);
+
+			return option.appendTo(select);
+	}
+
+
+
+
+
+
+
+
+
+
+$('#upperstep2').hide();
+
+
+
+
+	$('#upperstep1 .done').click(function() {
+
+		$('#upperstep1')
+
+		  .transition('fade',function() {
+		    	
+		    	$('#upperstep2').transition('fade');
+
+		  });
+
+		$('#upperstep1header').addClass('grey');
+
+		$('#upperstep1header i').removeClass('hidden');
 		    	$('#statestep3').transition('fade');
 
 		  });
@@ -41540,6 +41722,29 @@ new Vue ({
 		compare:[],
 
 	},
+	
+	ready: function() {
+
+			var place;
+
+			console.log(this.tspcode+'hihi');
+
+			if(this.amcode==null){
+				
+				data={ constituency_am_pcode:this.amcode ,legislature:this.legislature,constituency_number:this.cnumber };
+			}
+			else if(this.legislature=='ပြည်သူ့လွှတ်တော်'){
+
+				data={ constituency_ts_pcode:this.tspcode , legislature:this.legislature};
+			}
+
+			else{
+
+				data={ constituency_ts_pcode:this.tspcode , legislature:'state_region',constituency_number:this.cnumber};
+			}
+
+			var that=this;
+	},
 	ready: function() {
 
 			var place;
@@ -41558,6 +41763,21 @@ new Vue ({
 		    this.$http.get('../candidate',data,function (data, status, request) {
 
 				data.data.forEach(function(value){
+					
+					if(value.id!=that.candidateId){
+
+						that.compare.push(value);
+					}
+
+				});
+
+
+		    }).error(function (data, status, request) {
+		          
+		          // handle error
+		    })		
+
+	},
 
 					that.compare.push(value);
 
